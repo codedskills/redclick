@@ -64,9 +64,15 @@ def downloadReq():
      args = ArgumentParser()
      args.add_argument('-install',dest='install_code', help='Packages Name')
      args.add_argument('-v' ,dest='version_code', help='Version of Package(Optional)')
+     args.add_argument('-update',dest='update_virtual',help='Update The Redclick`s Script' )
      args = args.parse_args()
      if not args.install_code:
-         print("Missing Argument : No package specified")
+         if args.update_virtual:
+            updateSys()
+            exit()
+         else:
+             print("Missing Argument : No package specified")
+
      if not args.version_code:
          print("No version selected>>{0}Custom Mode").format(GREEN)
          downloadReqNoVer(pkg=args.install_code)
@@ -82,6 +88,25 @@ def downloadReq():
      system('rm -Rf '+filename+'.zip')
      system('figlet success!!')
      exit('SuccesFully Downloaded')
+
+def updateSys():
+    tempFolder = "tempCa"
+    print("Backing Up Libraries")
+    system('mkdir tempCa')
+    system('cp -r www tempCa/')
+    print("Getting Updates From Server")
+    download('http://exploitable-web.ml/shared/redclick.new.zip')
+    system('unzip redclick.new.zip')
+    print("Checking Status")
+    print("Configuring Folder")
+    system('cp -r redclick.new/ /')
+    system('rm -Rf redclick.new/')
+    system('rm -Rf redclick.new.zip')
+    system('cp -r tempCa/www /')
+    system('rm -Rf tempCa/')
+    print("Configured!!")
+
+    system('figlet Updated SuccesFully')
 
 def downloadReqNoVer(pkg):
     print("Connecting server :: {0}For{1} "+pkg).format(RED,END)
