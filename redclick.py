@@ -1,3 +1,18 @@
+'''
+    CODEDSKILLS INC,.
+    THIS IS REDCLICK.PY A RESOURCE DOWNLOADER FRAMWORK
+    for Linux Written in python
+    Download the latest update here!!
+'''
+
+
+
+
+
+
+
+
+
 from time import sleep
 from sys import stdout, exit
 from os import system, path
